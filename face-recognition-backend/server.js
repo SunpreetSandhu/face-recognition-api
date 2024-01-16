@@ -27,7 +27,7 @@ const database = {
 };
 
 app.get("/", (req, res) => {
-  res.send("working");
+  res.send(database.users);
 });
 app.post("/signin", (req, res) => {
   if (
