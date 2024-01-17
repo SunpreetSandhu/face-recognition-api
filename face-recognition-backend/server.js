@@ -37,7 +37,7 @@ app.post("/signin", (req, res) => {
     req.body.password === database.users[0].password
   ) {
     console.log(req.body.email, req.body.password);
-    res.json("success");
+    res.json(database.users[0]);
   } else {
     res.status(400).json("error");
   }
