@@ -74,7 +74,6 @@ app.post("/register", (req, res) => {
 
 app.get("/profile/:id", (req, res) => {
   const { id } = req.params;
-  let found = false;
 
   db.select("*")
     .from("users")
@@ -82,11 +81,11 @@ app.get("/profile/:id", (req, res) => {
       id: id,
     })
     .then((user) => {
-      console.log(user[0]);
+      res.json(user[0]);
     });
-  if (!found) {
-    res.status(400).json("not found");
-  }
+  //   if (!found) {
+  //     res.status(400).json("not found");
+  //   }
 });
 app.put("/image", (req, res) => {
   const { id } = req.body;
