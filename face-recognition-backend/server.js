@@ -7,6 +7,7 @@ const knex = require("knex");
 const register = require("./controllers/register");
 const signin = require("./controllers/signin");
 const profile = require("./controllers/profile");
+const Image = require("./controllers/image");
 const db = knex({
   client: "pg",
   connection: {
@@ -34,16 +35,9 @@ app.post("/register", (req, res) => {
 app.get("/profile/:id", (req, res) => {
   profile.handleProfileGet(req, res, db);
 });
+
 app.put("/image", (req, res) => {
-  const { id } = req.body;
-  db("users")
-    .where("id", "=", id)
-    .increment("entries", 1)
-    .returning("entries")
-    .then((entries) => {
-      res.json(entries[0].entries);
-    })
-    .catch((err) => res.status(400).json("unable to get entries"));
+  Image.handleImage(req, res, db);
 });
 
 // // Load hash from your password DB.
